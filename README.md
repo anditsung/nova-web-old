@@ -1,8 +1,11 @@
 # Install NovaWeb To Laravel
 this application require laravel version 6 and laravel nova version 2
 
+
+
 ### Install Laravel
-1. composer create-project laravel/larevel=^6 [PROJECT_NAME]
+* composer create-project laravel/larevel=^6 [PROJECT_NAME]
+
 
 ### Install Laravel Nova
 * extract the application to project root folder and rename it to nova
@@ -12,6 +15,7 @@ this application require laravel version 6 and laravel nova version 2
 > composer require laravel/nova="*"
 * install nova to laravel 
 > php artisan nova:install
+
 
 ### Install NovaWeb
 * add nova-web to composer repositories
