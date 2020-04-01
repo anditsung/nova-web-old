@@ -12,12 +12,8 @@ let tailwindcss = require('tailwindcss')
  |
  */
 
-mix.sass('resources/sass/app.scss', 'public/vendor/novaweb')
+mix.postCss('resources/css/app.css', 'public/vendor/novaweb', [tailwindcss('tailwind.js')])
     .copy('resources/fonts/google-font-nunito.css', 'public/vendor/novaweb')
     .copyDirectory('resources/fonts/nunito-v12-latin', 'public/vendor/novaweb/fonts/nunito-v12-latin')
-    .options({
-        processCssUrls: false,
-        postCss: [tailwindcss('tailwind.config.js')],
-    })
     .setPublicPath('public/vendor/novaweb')
     .version()

@@ -22,23 +22,8 @@ class PublishCommand extends Command
             '--force' => $this->option('force'),
         ]);
 
-//        $this->call('vendor:publish', [
-//            '--tag' => 'novaweb-views',
-//            '--force' => $this->option('force'),
-//        ]);
-//
-//        $this->call('vendor:publish', [
-//            '--tag' => 'novaweb-fonts',
-//            '--force' => $this->options('force'),
-//        ]);
-
         $this->call('vendor:publish', [
             '--tag' => 'novaweb-resources',
-            '--force' => $this->options('force'),
-        ]);
-
-        $this->call('vendor:publish', [
-            '--tag' => 'novaweb-tailwind',
             '--force' => $this->options('force'),
         ]);
 
@@ -47,27 +32,49 @@ class PublishCommand extends Command
             '--force' => $this->options('force'),
         ]);
 
-        $this->comment("Installing Tailwindcss");
-        $this->installTailwindcss();
-        $this->comment("Done install tailwindcss");
+        if($this->confirm("Use nova tailwind?", true)) {
+            $this->comment("Installing Nova Tailwind");
+            $this->call('vendor:publish', [
+                '--tag' => 'novaweb-novatailwind',
+                '--force' => $this->options('force'),
+            ]);
+            $this->call('vendor:publish', [
+                '--tag' => 'novaweb-cssnovatailwind',
+                '--force' => $this->options('force'),
+            ]);
+            $this->installNovaTailwind();
+            $this->comment("Done install nova tailwind");
+        }
+        else {
+            $this->comment("Installing Tailwind");
+            $this->call('vendor:publish', [
+                '--tag' => 'novaweb-tailwind',
+                '--force' => $this->options('force'),
+            ]);
+            $this->call('vendor:publish', [
+                '--tag' => 'novaweb-csstailwind',
+                '--force' => $this->options('force'),
+            ]);
+            $this->installTailwind();
+            $this->comment("Done install tailwind");
+        }
 
         $this->comment("Compiling asset");
         $this->compile();
         $this->comment("Done compile asset");
 
-//        if ($this->confirm("Would you like to compile the asset's assets?", true)) {
-//            $this->compile();
-//
-//            $this->output->newLine();
-//        }
-
         $this->call('view:clear');
-
-        //exec('npm run prod');
     }
 
-    protected function installTailwindcss()
+    protected function installNovaTailwind()
     {
+        // laravel nova masih memakai versi 0.6.0 jika di upgrade maka tidak bisa compile
+        $this->executeCommand("npm install tailwindcss@0.6.0");
+    }
+
+    protected function installTailwind()
+    {
+        // install latest tailwind
         $this->executeCommand("npm install tailwindcss");
     }
 

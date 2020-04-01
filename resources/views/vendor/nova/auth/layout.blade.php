@@ -11,7 +11,7 @@
     <link href="{{ mix('google-font-nunito.css', 'vendor/novaweb') }}" rel="stylesheet">
 
     <!-- Styles -->
-    <link rel="stylesheet" href="{{ mix('app.css', 'vendor/nova') }}">
+    <link rel="stylesheet" href="{{ mix('app.css', 'vendor/novaweb') }}">
 
     <!-- Custom Meta Data -->
     @include('nova::partials.meta')

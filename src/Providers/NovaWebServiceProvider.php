@@ -35,28 +35,34 @@ class NovaWebServiceProvider extends ServiceProvider
 
     protected function registerPublishing()
     {
+        /* CONFIG */
         $this->publishes([
             __DIR__.'/../../config/nova.php' => config_path('nova.php'),
         ], 'novaweb-config');
 
         $this->publishes([
-            __DIR__.'/../../resources' => resource_path(''),
-        ], 'novaweb-resources');
-
-//        $this->publishes([
-//            __DIR__.'/../../resources/views' => resource_path('views'),
-//        ], 'novaweb-views');
-//
-//        $this->publishes([
-//            __DIR__.'/../../resources/fonts' => resource_path('fonts'),
-//        ], 'novaweb-fonts');
+            __DIR__.'/../../config/tailwind.nova.js' => base_path('tailwind.js'),
+        ], 'novaweb-novatailwind');
 
         $this->publishes([
-            __DIR__.'/../../config/tailwind.config.js' => base_path('tailwind.config.js'),
+            __DIR__.'/../../config/css/nova.css' => resource_path('css/app.css')
+        ], 'novaweb-cssnovatailwind');
+
+        $this->publishes([
+            __DIR__.'/../../config/tailwind.config.js' => base_path('tailwind.js'),
         ], 'novaweb-tailwind');
+
+        $this->publishes([
+            __DIR__.'/../../config/css/tailwind.css' => resource_path('css/app.css')
+        ], 'novaweb-csstailwind');
 
         $this->publishes([
             __DIR__.'/../../config/webpack.mix.js' => base_path('webpack.mix.js'),
         ], 'novaweb-webpack');
+
+        /* RESOURCES */
+        $this->publishes([
+            __DIR__.'/../../resources' => resource_path(''),
+        ], 'novaweb-resources');
     }
 }
