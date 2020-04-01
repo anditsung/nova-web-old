@@ -1,0 +1,29 @@
+{
+    "name": "anditsung/nova-web",
+    "description": "nova website module",
+    "authors": [
+        {
+            "name": "anditsung",
+            "email": "anditsung@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": "^7.2",
+        "laravel/framework": "^6.2",
+        "laravel/nova": "^2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Anditsung\\NovaWeb\\": "src/",
+            "App\\": "app/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Anditsung\\NovaWeb\\Providers\\NovaWebServiceProvider"
+            ]
+        }
+    }
+}
