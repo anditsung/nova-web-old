@@ -11,7 +11,7 @@
     <link href="{{ mix('google-font-nunito.css', 'vendor/novaweb') }}" rel="stylesheet">
 
     <!-- Styles -->
-    <link rel="stylesheet" href="{{ mix('app.css', 'vendor/novaweb') }}">
+    <link rel="stylesheet" href="{{ mix('app.css', 'vendor/nova') }}">
 
     <!-- Tool Styles -->
     @foreach(\Laravel\Nova\Nova::availableStyles(request()) as $name => $path)
@@ -19,11 +19,36 @@
     @endforeach
 
 <!-- Custom Meta Data -->
-    @include('vendor.nova.partials.meta')
+    @include('nova::partials.meta')
 
 </head>
-<body>
-<div id="nova">
+<body class="bg-40 text-black">
+<div id="novaweb">
+    <div class="flex flex-col h-screen">
+        @if (Route::has('login'))
+            <div class="ml-auto px-4 py-4">
+                @auth
+                    <a class="px-8 py-2 rounded-lg font-bold text-black no-underline hover:bg-60" href="{{ url('admin') }}">Admin</a>
+                    <a
+                        class="ml-2 px-8 py-2 rounded-lg font-bold text-black no-underline hover:bg-60"
+                        onclick="document.getElementById('logout-form').submit();"
+                    >Logout</a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form>
+                @else
+                    <a class="px-8 py-2 rounded-lg font-bold text-black no-underline hover:bg-60" href="{{ route('login') }}">Login</a>
+
+                    @if (Route::has('register'))
+                        <a class="px-8 py-2 rounded-lg font-bold text-black no-underline hover:bg-60" href="{{ route('register') }}">Register</a>
+                    @endif
+                @endauth
+            </div>
+        @endif
+        <div class="flex flex-grow">
+            <div class="mx-auto my-auto">
+                <span style="font-size: 10em;">Laravel</span>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script>
@@ -31,23 +56,18 @@
 </script>
 
 <!-- Scripts -->
-<script src="{{ mix('manifest.js', 'vendor/nova') }}"></script>
-<script src="{{ mix('vendor.js', 'vendor/nova') }}"></script>
-<script src="{{ mix('app.js', 'vendor/nova') }}"></script>
+<script src="{{ mix('manifest.js', 'vendor/novaweb') }}"></script>
+<script src="{{ mix('vendor.js', 'vendor/novaweb') }}"></script>
+<script src="{{ mix('app.js', 'vendor/novaweb') }}"></script>
 
 <!-- Build Nova Instance -->
 <script>
-    window.Nova = new CreateNova(config)
+    window.NovaWeb = new CreateNovaWeb(config)
 </script>
 
-<!-- Tool Scripts -->
-@foreach (\Laravel\Nova\Nova::availableScripts(request()) as $name => $path)
-    @if (\Illuminate\Support\Str::startsWith($path, ['http://', 'https://']))
-        <script src="{!! $path !!}"></script>
-    @else
-        <script src="/nova-api/scripts/{{ $name }}"></script>
-    @endif
-@endforeach
+<script>
+    NovaWeb.liftOff()
+</script>
 
 </body>
 </html>

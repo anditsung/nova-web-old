@@ -1,5 +1,4 @@
 const mix = require('laravel-mix');
-let tailwindcss = require('tailwindcss')
 
 /*
  |--------------------------------------------------------------------------
@@ -12,8 +11,69 @@ let tailwindcss = require('tailwindcss')
  |
  */
 
-mix.postCss('resources/css/app.css', 'public/vendor/novaweb', [tailwindcss('tailwind.js')])
+// mix.postCss('resources/css/app.css', 'public/vendor/novaweb', [tailwindcss('tailwind.js')])
+//     .copy('resources/fonts/google-font-nunito.css', 'public/vendor/novaweb')
+//     .copyDirectory('resources/fonts/nunito-v12-latin', 'public/vendor/novaweb/fonts/nunito-v12-latin')
+//     .setPublicPath('public/vendor/novaweb')
+//     .version()
+
+// mix.copy('resources/fonts/google-font-nunito.css', 'public/vendor/novaweb')
+//     .copyDirectory('resources/fonts/nunito-v12-latin', 'public/vendor/novaweb/fonts/nunito-v12-latin')
+//     .setPublicPath('public/vendor/novaweb')
+//     .version()
+
+mix.js('resources/js/app.js', '')
+    .extract([
+        'vue',
+        'vue-toasted',
+        'axios'
+    ])
+    .webpackConfig({
+        resolve: {
+            alias: {
+                nova: __dirname + '/nova/resources/js',
+            }
+        }
+    })
     .copy('resources/fonts/google-font-nunito.css', 'public/vendor/novaweb')
     .copyDirectory('resources/fonts/nunito-v12-latin', 'public/vendor/novaweb/fonts/nunito-v12-latin')
     .setPublicPath('public/vendor/novaweb')
     .version()
+
+// mix.js('resources/js/app.js','')
+//     .extract([
+//         'axios',
+//         'chartist-plugin-tooltips',
+//         'chartist',
+//         'codemirror',
+//         'flatpickr',
+//         'form-backend-validation',
+//         'inflector-js',
+//         'laravel-nova',
+//         'lodash',
+//         'markdown-it',
+//         'marked',
+//         'moment-timezone',
+//         'moment',
+//         'numbro',
+//         'places.js',
+//         'popper.js',
+//         'portal-vue',
+//         'trix',
+//         'vue-async-computed',
+//         'vue-clickaway',
+//         'vue-router',
+//         'vue-toasted',
+//         'vue',
+//     ])
+//     .webpackConfig({
+//         resolve: {
+//             alias: {
+//                 '@': path.resolve(__dirname, 'nova/resources/js/'),
+//             },
+//         },
+//     })
+//     .copy('resources/fonts/google-font-nunito.css', 'public/vendor/novaweb')
+//     .copyDirectory('resources/fonts/nunito-v12-latin', 'public/vendor/novaweb/fonts/nunito-v12-latin')
+//     .setPublicPath('public/vendor/novaweb')
+//     .version()

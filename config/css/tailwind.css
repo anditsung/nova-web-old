@@ -239,7 +239,7 @@ textarea.form-input:read-only,
 /* Checkbox
 ---------------------------------------------------------------------------- */
 .checkbox {
-    @apply appearance-none inline-block align-middle select-none flex-no-shrink h-5 w-5 text-primary bg-white border border-60 rounded;
+    @apply appearance-none inline-block align-middle select-none flex-shrink-0 h-5 w-5 text-primary bg-white border border-60 rounded;
     -webkit-print-color-adjust: exact;
     color-adjust: exact;
     display: inline-block;
@@ -708,7 +708,7 @@ textarea.form-input:read-only,
 /* Override Form Field Widths For ConfirmActionModal
 -----------------------------------------------------------------------------*/
 .action .w-1\/5 {
-    @apply .flex-no-shrink;
+    @apply .flex-shrink-0;
 }
 
 .action .w-1\/2 {

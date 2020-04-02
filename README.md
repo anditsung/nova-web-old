@@ -11,7 +11,7 @@ this application require laravel version 6 and laravel nova version 2
 * add laravel nova to composer repositories
 > composer config repositories.nova path nova
 * add laravel nova to composer.json 
-> composer require laravel/nova="*"
+> composer require laravel/nova=^2
 * install nova to laravel 
 > php artisan nova:install
 
@@ -23,3 +23,8 @@ this application require laravel version 6 and laravel nova version 2
 > composer require anditsung/nova-web="*"
 * install nova-web
 > php artisan novaweb:install
+---
+
+#TODO
+* login using email / username / phone
+* add spatie permissions

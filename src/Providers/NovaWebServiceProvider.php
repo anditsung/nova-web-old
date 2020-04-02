@@ -31,6 +31,10 @@ class NovaWebServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->registerPublishing();
         }
+
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'nova');
+
+        //$this->app->alias(MyLoginController::class, AppLoginController::class);
     }
 
     protected function registerPublishing()
@@ -64,5 +68,6 @@ class NovaWebServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../../resources' => resource_path(''),
         ], 'novaweb-resources');
+
     }
 }
